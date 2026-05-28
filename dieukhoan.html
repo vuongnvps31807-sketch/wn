@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Điều kiện điều khoản – 
+  <link rel="icon" href="data:,">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --pink: #ff1f8e;
+      --pink-deep: #d4006e;
+      --pink-cream: #fff0f7;
+      --navy: #0d1b3e;
+      --navy-light: #1a2d5a;
+      --white: #ffffff;
+      --gray: #f5f6fa;
+      --text: #2d2d2d;
+      --text-light: #6b7280;
+      --border: #e5e7eb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      color: var(--text);
+      background: var(--white);
+    }
+
+    /* HEADER */
+    header {
+      background: var(--navy);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .logo a {
+      text-decoration: none;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: var(--pink); }
+
+    nav ul {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--pink); }
+
+    /* HERO BANNER */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #2d1060 100%);
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,31,142,0.15) 0%, transparent 70%);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,31,142,0.1) 0%, transparent 70%);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--pink); }
+    .breadcrumb span { color: var(--pink); font-weight: 600; }
+
+    .hero h1 {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--pink);
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.65);
+      font-size: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      position: sticky;
+      top: 80px;
+      background: var(--gray);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .sidebar h3 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    .sidebar ul { list-style: none; }
+
+    .sidebar ul li { margin-bottom: 4px; }
+
+    .sidebar ul li a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s;
+      line-height: 1.4;
+    }
+
+    .sidebar ul li a:hover {
+      background: var(--pink-cream);
+      color: var(--pink);
+    }
+
+    .sidebar ul li a.active {
+      background: var(--pink);
+      color: var(--white);
+    }
+
+    /* CONTENT */
+    .content { min-width: 0; }
+
+    .section-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.2s;
+    }
+
+    .section-card:hover {
+      box-shadow: 0 8px 32px rgba(255,31,142,0.08);
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--pink-cream);
+      color: var(--pink);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .section-card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-card h2 .icon {
+      width: 36px; height: 36px;
+      background: var(--pink-cream);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .section-card p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #4b5563;
+      margin-bottom: 12px;
+    }
+
+    .section-card p:last-child { margin-bottom: 0; }
+
+    .term-list {
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .term-list li {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .term-list li:last-child { border-bottom: none; }
+
+    .term-list li::before {
+      content: '✦';
+      color: var(--pink);
+      font-size: 10px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+
+    .highlight-box p {
+      color: rgba(255,255,255,0.8);
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+
+    .highlight-box strong { color: var(--pink); }
+
+    .updated-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ecfdf5;
+      color: #059669;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .updated-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #059669;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 32px 40px;
+      font-size: 13px;
+      margin-top: 40px;
+    }
+
+    footer strong { color: var(--pink); }
+
+    @media (max-width: 768px) {
+      .container { grid-template-columns: 1fr; padding: 24px 20px; }
+      .sidebar { position: static; }
+      .hero { padding: 40px 20px; }
+      .hero h1 { font-size: 26px; }
+      header { padding: 0 20px; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+<div class="logo">
+    <a href="index.html">
+        <img src="cake-logo.png" alt="CaKeBank Logo" style="height: 40px; width: auto;">
+    </a>
+</div>
+  <nav>
+    <ul>
+      <li><a href="index.html#features">Ưu đãi</a></li>
+      <li><a href="index.html#register">Mở thẻ</a></li>
+      <li><a href="index.html#products">Sản phẩm</a></li>
+      <li><a href="dieukhoan.html" style="color:#ff1f8e">Điều khoản</a></li>
+      <li><a href="#">Liên hệ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="breadcrumb">
+    <a href="index.html">Trang chủ</a>
+    <span>›</span>
+    <span>Điều kiện điều khoản</span>
+  </div>
+  <h1>Điều kiện <em>điều khoản</em></h1>
+  <p>Các điều khoản và điều kiện khi sử dụng dịch vụ của CaKeBank</p>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Mục lục</h3>
+    <ul>
+      <li><a href="#gioi-thieu" class="active">1. Giới thiệu</a></li>
+      <li><a href="#dinh-nghia">2. Định nghĩa</a></li>
+      <li><a href="#dieu-khoan-su-dung">3. Điều khoản sử dụng</a></li>
+      <li><a href="#quyen-nghia-vu">4. Quyền & nghĩa vụ</a></li>
+      <li><a href="#bao-mat">5. Bảo mật dữ liệu</a></li>
+      <li><a href="#phi-dich-vu">6. Phí dịch vụ</a></li>
+      <li><a href="#trach-nhiem">7. Trách nhiệm</a></li>
+      <li><a href="#chinh-sach">8. Chính sách hoàn tiền</a></li>
+      <li><a href="#lien-he">9. Liên hệ</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <div class="updated-badge">Cập nhật lần cuối: 01/01/2025</div>
+
+    <!-- 1. Giới thiệu -->
+    <div class="section-card" id="gioi-thieu">
+      <span class="section-tag">Điều khoản 1</span>
+      <h2><span class="icon">👋</span> Giới thiệu</h2>
+      <p>Chào mừng bạn đến với <strong>CaKeBank</strong> — ngân hàng số hiện đại, mang đến trải nghiệm tài chính tiện lợi, nhanh chóng và an toàn.</p>
+      <p>Bằng việc truy cập và sử dụng dịch vụ của chúng tôi, bạn đồng ý tuân thủ các điều khoản và điều kiện được nêu trong tài liệu này. Vui lòng đọc kỹ trước khi sử dụng.</p>
+      <div class="highlight-box">
+        <p><strong>Lưu ý quan trọng:</strong> Nếu bạn không đồng ý với bất kỳ điều khoản nào, vui lòng ngừng sử dụng dịch vụ và liên hệ với chúng tôi để được hỗ trợ.</p>
+      </div>
+    </div>
+
+    <!-- 2. Định nghĩa -->
+    <div class="section-card" id="dinh-nghia">
+      <span class="section-tag">Điều khoản 2</span>
+      <h2><span class="icon">📖</span> Định nghĩa</h2>
+      <p>Trong tài liệu này, các thuật ngữ sau được hiểu như sau:</p>
+      <ul class="term-list">
+        <li><strong>"CaKeBank"</strong> — Chỉ công ty chúng tôi và các dịch vụ tài chính số được cung cấp.</li>
+        <li><strong>"Khách hàng" / "Bạn"</strong> — Cá nhân hoặc tổ chức đăng ký và sử dụng dịch vụ của CaKeBank.</li>
+        <li><strong>"Tài khoản"</strong> — Tài khoản ngân hàng số được mở tại CaKeBank.</li>
+        <li><strong>"Giao dịch"</strong> — Bao gồm chuyển tiền, thanh toán, nạp tiền và các hoạt động tài chính khác.</li>
+        <li><strong>"Dịch vụ"</strong> — Toàn bộ sản phẩm và tiện ích tài chính do CaKeBank cung cấp.</li>
+      </ul>
+    </div>
+
+    <!-- 3. Điều khoản sử dụng -->
+    <div class="section-card" id="dieu-khoan-su-dung">
+      <span class="section-tag">Điều khoản 3</span>
+      <h2><span class="icon">📋</span> Điều khoản sử dụng</h2>
+      <p>Khi sử dụng dịch vụ CaKeBank, bạn cam kết:</p>
+      <ul class="term-list">
+        <li>Cung cấp thông tin cá nhân chính xác, đầy đủ và cập nhật kịp thời khi có thay đổi.</li>
+        <li>Chỉ sử dụng dịch vụ cho các mục đích hợp pháp, không vi phạm pháp luật Việt Nam.</li>
+        <li>Bảo mật thông tin đăng nhập, mật khẩu và mã OTP; không chia sẻ cho bất kỳ ai.</li>
+        <li>Không thực hiện các hành vi gian lận, lừa đảo hoặc rửa tiền qua hệ thống.</li>
+        <li>Thông báo ngay cho CaKeBank khi phát hiện tài khoản bị truy cập trái phép.</li>
+      </ul>
+    </div>
+
+    <!-- 4. Quyền và nghĩa vụ -->
+    <div class="section-card" id="quyen-nghia-vu">
+      <span class="section-tag">Điều khoản 4</span>
+      <h2><span class="icon">⚖️</span> Quyền & Nghĩa vụ các bên</h2>
+      <p><strong>Quyền của khách hàng:</strong></p>
+      <ul class="term-list">
+        <li>Được sử dụng đầy đủ các dịch vụ theo gói đã đăng ký.</li>
+        <li>Được bảo vệ thông tin cá nhân theo quy định pháp luật.</li>
+        <li>Được hỗ trợ 24/7 qua hotline và ứng dụng.</li>
+        <li>Được thông báo trước ít nhất 30 ngày khi có thay đổi điều khoản.</li>
+      </ul>
+      <p style="margin-top:16px"><strong>Nghĩa vụ của khách hàng:</strong></p>
+      <ul class="term-list">
+        <li>Duy trì số dư tài khoản theo quy định tối thiểu.</li>
+        <li>Thanh toán đầy đủ các khoản phí dịch vụ đúng hạn.</li>
+        <li>Tuân thủ các quy định và chính sách của CaKeBank.</li>
+      </ul>
+    </div>
+
+    <!-- 5. Bảo mật -->
+    <div class="section-card" id="bao-mat">
+      <span class="section-tag">Điều khoản 5</span>
+      <h2><span class="icon">🔒</span> Bảo mật dữ liệu</h2>
+      <p>CaKeBank cam kết bảo vệ dữ liệu cá nhân của khách hàng theo Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân.</p>
+      <ul class="term-list">
+        <li>Dữ liệu được mã hóa theo chuẩn AES-256 và lưu trữ trên máy chủ bảo mật.</li>
+        <li>CaKeBank không bán hoặc chia sẻ dữ liệu cá nhân với bên thứ ba khi chưa có sự đồng ý.</li>
+        <li>Khách hàng có quyền yêu cầu xem, chỉnh sửa hoặc xóa dữ liệu cá nhân của mình.</li>
+        <li>Hệ thống được kiểm tra bảo mật định kỳ bởi đơn vị độc lập.</li>
+      </ul>
+      <div class="highlight-box">
+        <p>Mọi yêu cầu về dữ liệu cá nhân, vui lòng liên hệ: <strong>privacy@cakebank.vn</strong></p>
+      </div>
+    </div>
+
+    <!-- 6. Phí dịch vụ -->
+    <div class="section-card" id="phi-dich-vu">
+      <span class="section-tag">Điều khoản 6</span>
+      <h2><span class="icon">💳</span> Phí dịch vụ</h2>
+      <p>Biểu phí dịch vụ được công khai trên website và ứng dụng CaKeBank. CaKeBank có quyền điều chỉnh biểu phí và sẽ thông báo trước ít nhất <strong>30 ngày</strong>.</p>
+      <ul class="term-list">
+        <li>Phí chuyển khoản nội bộ: <strong>Miễn phí</strong></li>
+        <li>Phí chuyển khoản liên ngân hàng: Theo biểu phí hiện hành.</li>
+        <li>Phí quản lý tài khoản: Miễn phí trong 12 tháng đầu.</li>
+        <li>Phí rút tiền ATM: Miễn phí tại hệ thống VPBank.</li>
+      </ul>
+    </div>
+
+    <!-- 7. Trách nhiệm -->
+    <div class="section-card" id="trach-nhiem">
+      <span class="section-tag">Điều khoản 7</span>
+      <h2><span class="icon">🛡️</span> Giới hạn trách nhiệm</h2>
+      <p>CaKeBank không chịu trách nhiệm đối với các thiệt hại phát sinh do:</p>
+      <ul class="term-list">
+        <li>Lỗi của bên thứ ba bao gồm nhà mạng, cổng thanh toán, hệ thống ngân hàng đối tác.</li>
+        <li>Sự kiện bất khả kháng như thiên tai, dịch bệnh, mất điện diện rộng.</li>
+        <li>Khách hàng tự lộ thông tin đăng nhập hoặc bị lừa đảo từ bên ngoài.</li>
+        <li>Giao dịch không hợp lệ do lỗi nhập thông tin từ phía khách hàng.</li>
+      </ul>
+    </div>
+
+    <!-- 8. Chính sách hoàn tiền -->
+    <div class="section-card" id="chinh-sach">
+      <span class="section-tag">Điều khoản 8</span>
+      <h2><span class="icon">↩️</span> Chính sách hoàn tiền</h2>
+      <p>Đối với các giao dịch bị lỗi hoặc trùng lặp do hệ thống, CaKeBank cam kết hoàn tiền trong vòng <strong>3–5 ngày làm việc</strong>.</p>
+      <ul class="term-list">
+        <li>Khách hàng cần cung cấp bằng chứng giao dịch khi yêu cầu hoàn tiền.</li>
+        <li>Giao dịch đã hoàn thành thành công sẽ không được hoàn tiền theo yêu cầu đơn phương.</li>
+        <li>Trường hợp tranh chấp sẽ được giải quyết theo quy định pháp luật Việt Nam.</li>
+      </ul>
+    </div>
+
+    <!-- 9. Liên hệ -->
+    <div class="section-card" id="lien-he">
+      <span class="section-tag">Điều khoản 9</span>
+      <h2><span class="icon">📞</span> Liên hệ & Hỗ trợ</h2>
+      <p>Nếu bạn có bất kỳ câu hỏi nào về điều khoản sử dụng, vui lòng liên hệ:</p>
+      <ul class="term-list">
+        <li><strong>Hotline:</strong> 1900 636 686 (8:00 – 22:00 hàng ngày)</li>
+        <li><strong>Email:</strong> support@cakebank.vn</li>
+        <li><strong>Địa chỉ:</strong> Số 89 Láng Hạ, Phường Đống Đa, Hà Nội</li>
+        <li><strong>Website:</strong> www.cakebank.vn</li>
+      </ul>
+      <div class="highlight-box">
+        <p>Điều khoản này có hiệu lực từ ngày <strong>01/01/2025</strong>. CaKeBank có quyền cập nhật điều khoản bất cứ lúc nào và sẽ thông báo đến khách hàng qua email hoặc ứng dụng.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>CaKeBank</strong> — Ngân hàng số hiện đại. Mọi quyền được bảo lưu.</p>
+</footer>
+
+<script>
+  // Highlight sidebar khi scroll
+  const sections = document.querySelectorAll('.section-card');
+  const links = document.querySelectorAll('.sidebar a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 100) {
+        current = section.getAttribute('id');
+      }
+    });
+    links.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
